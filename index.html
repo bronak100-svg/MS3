@@ -13,9 +13,11 @@
         })();
     </script>
     <style>
-        .nav-link { color: #2563eb; cursor: pointer; font-weight: 600; }
+        .nav-link { color: #2563eb; cursor: pointer; font-weight: 600; transition: opacity 0.3s; }
+        .nav-link:hover { opacity: 0.7; }
         .hidden-section { display: none; }
         .thick-border { border: 2px solid #cbd5e1 !important; }
+        .thick-border:focus { border-color: #2563eb !important; outline: none; }
         .content-card {
             background-color: white;
             border-radius: 12px;
@@ -31,22 +33,18 @@
     <div class="content-card text-center">
         <div id="home-page">
             <header class="mb-8">
-                <h1 class="text-2xl font-bold mb-1 text-slate-800">ד"ר שלמה ברונק</h1>
-                <p class="text-base text-blue-600 font-medium mb-8">מומחה באורתופדיה</p>
+                <h1 class="text-2xl font-bold mb-1 text-slate-800">ד"ר שלמה ברונק</h1> <p class="text-base text-blue-600 font-medium mb-8">מומחה באורתופדיה</p>
                 <div class="space-y-2 text-sm text-gray-500">
-                    <p>ניתוחים ארתרוסקופים של הברך</p>
-                    <p>טיפול PRP</p>
+                    <p>ניתוחים ארתרוסקופים של הברך</p> <p>טיפול PRP</p>
                     <p>פציעות ספורט</p>
                 </div>
             </header>
             <nav class="mt-6 pt-6 border-t border-gray-100">
-                <div onclick="showContact()" class="nav-link text-lg">צור קשר</div>
-            </nav>
+                <div onclick="showContact()" class="nav-link text-lg">צור קשר</div> </nav>
         </div>
 
         <div id="contact-page" class="hidden-section text-right">
-            <h1 class="text-xl font-bold text-center mb-8 text-slate-800">צרו קשר</h1>
-            <form id="contact-form" class="space-y-4">
+            <h1 class="text-xl font-bold text-center mb-8 text-slate-800">צרו קשר</h1> <form id="contact-form" class="space-y-4">
                 <div>
                     <label class="block text-xs font-semibold mb-1 mr-1">שם מלא</label>
                     <input type="text" name="user_name" required class="w-full p-2 thick-border rounded-lg text-sm">
@@ -67,9 +65,8 @@
                     <label class="block text-xs font-semibold mb-1 mr-1">הודעה</label>
                     <textarea name="message" rows="3" class="w-full p-2 thick-border rounded-lg text-sm"></textarea>
                 </div>
-                <button type="submit" id="submit-btn" class="w-full bg-[#2563eb] text-white font-bold py-3 rounded-lg text-sm">
-                    שלח הודעה
-                </button>
+                <button type="submit" id="submit-btn" class="w-full bg-[#2563eb] text-white font-bold py-3 rounded-lg text-sm hover:bg-blue-700 transition">
+                    שלח הודעה </button>
             </form>
             <div id="response-msg" class="mt-4 text-center text-sm font-medium hidden"></div>
             <div onclick="showHome()" class="mt-6 text-center text-gray-400 text-[10px] cursor-pointer underline">חזרה לדף הבית</div>
@@ -90,19 +87,26 @@
             const btn = document.getElementById('submit-btn');
             const msg = document.getElementById('response-msg');
             btn.innerText = 'שולח...';
-            // יש להחליף את ה-IDs כאן בערכים מחשבון ה-EmailJS שלך
-            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+            btn.disabled = true;
+
+            // כאן עליך להזין את הנתונים שלך מחשבון ה-EmailJS
+            const serviceID = 'service_677feyl'; // דוגמה, החלף ב-Service ID שלך
+            const templateID = 'template_v888qit'; // דוגמה, החלף ב-Template ID שלך
+
+            emailjs.sendForm(serviceID, templateID, this)
                 .then(function() {
                     msg.innerText = 'ההודעה נשלחה בהצלחה!';
                     msg.className = 'mt-4 text-center text-sm text-green-600';
                     msg.classList.remove('hidden');
                     btn.innerText = 'שלח הודעה';
+                    btn.disabled = false;
                     document.getElementById('contact-form').reset();
-                }, function() {
+                }, function(error) {
                     msg.innerText = 'שגיאה. וודא שהגדרת את ה-IDs בקוד.';
                     msg.className = 'mt-4 text-center text-sm text-red-600';
                     msg.classList.remove('hidden');
                     btn.innerText = 'שלח הודעה';
+                    btn.disabled = false;
                 });
         });
     </script>
