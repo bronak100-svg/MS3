@@ -8,25 +8,14 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
-            // המפתח הציבורי שלך מהצילום
+            // המפתח הציבורי שלך
             emailjs.init("FKkmN1RQmu2tsfL7H");
         })();
     </script>
     <style>
-        .nav-link { color: #2563eb; transition: opacity 0.3s ease; cursor: pointer; font-weight: 600; }
-        .nav-link:hover { opacity: 0.8; }
+        .nav-link { color: #2563eb; cursor: pointer; font-weight: 600; }
         .hidden-section { display: none; }
-        
-        /* שוליים עבים לשדות (2px) לראייה טובה יותר */
-        .thick-border {
-            border: 2px solid #cbd5e1 !important;
-        }
-        .thick-border:focus {
-            border-color: #2563eb !important;
-            outline: none;
-        }
-
-        /* מלבן לבן במרכז המסך */
+        .thick-border { border: 2px solid #cbd5e1 !important; }
         .content-card {
             background-color: white;
             border-radius: 12px;
@@ -37,30 +26,27 @@
         }
     </style>
 </head>
-<body class="bg-gray-100 text-slate-900 flex flex-col items-center justify-start min-h-screen p-6 pt-12">
+<body class="bg-gray-100 flex flex-col items-center justify-start min-h-screen p-6 pt-12">
 
-    <div class="content-card">
-        
-        <div id="home-page" class="text-center">
+    <div class="content-card text-center">
+        <div id="home-page">
             <header class="mb-8">
-                <h1 class="text-2xl md:text-3xl font-bold mb-1 text-slate-800">ד"ר שלמה ברונק</h1>
-                <p class="text-base md:text-lg text-blue-600 font-medium mb-8">מומחה באורתופדיה</p>
-                
-                <div class="space-y-2 text-sm md:text-base text-gray-500">
+                <h1 class="text-2xl font-bold mb-1 text-slate-800">ד"ר שלמה ברונק</h1>
+                <p class="text-base text-blue-600 font-medium mb-8">מומחה באורתופדיה</p>
+                <div class="space-y-2 text-sm text-gray-500">
                     <p>ניתוחים ארתרוסקופים של הברך</p>
                     <p>טיפול PRP</p>
                     <p>פציעות ספורט</p>
                 </div>
             </header>
             <nav class="mt-6 pt-6 border-t border-gray-100">
-                <div onclick="showContact()" class="nav-link text-lg inline-block">צור קשר</div>
+                <div onclick="showContact()" class="nav-link text-lg">צור קשר</div>
             </nav>
         </div>
 
-        <div id="contact-page" class="hidden-section">
+        <div id="contact-page" class="hidden-section text-right">
             <h1 class="text-xl font-bold text-center mb-8 text-slate-800">צרו קשר</h1>
-            
-            <form id="contact-form" class="space-y-4 text-right">
+            <form id="contact-form" class="space-y-4">
                 <div>
                     <label class="block text-xs font-semibold mb-1 mr-1">שם מלא</label>
                     <input type="text" name="user_name" required class="w-full p-2 thick-border rounded-lg text-sm">
@@ -81,57 +67,42 @@
                     <label class="block text-xs font-semibold mb-1 mr-1">הודעה</label>
                     <textarea name="message" rows="3" class="w-full p-2 thick-border rounded-lg text-sm"></textarea>
                 </div>
-
-                <button type="submit" id="submit-btn" class="w-full bg-[#2563eb] text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition shadow-sm text-sm">
+                <button type="submit" id="submit-btn" class="w-full bg-[#2563eb] text-white font-bold py-3 rounded-lg text-sm">
                     שלח הודעה
                 </button>
             </form>
-            
             <div id="response-msg" class="mt-4 text-center text-sm font-medium hidden"></div>
-
-            <div class="mt-6 text-center">
-                <div onclick="showHome()" class="text-gray-400 hover:text-black text-[10px] cursor-pointer underline">חזרה לדף הבית</div>
-            </div>
+            <div onclick="showHome()" class="mt-6 text-center text-gray-400 text-[10px] cursor-pointer underline">חזרה לדף הבית</div>
         </div>
-
     </div>
 
     <script>
         function showContact() {
             document.getElementById('home-page').classList.add('hidden-section');
             document.getElementById('contact-page').classList.remove('hidden-section');
-            window.scrollTo(0, 0);
         }
-
         function showHome() {
             document.getElementById('contact-page').classList.add('hidden-section');
             document.getElementById('home-page').classList.remove('hidden-section');
-            window.scrollTo(0, 0);
         }
-
         document.getElementById('contact-form').addEventListener('submit', function(event) {
             event.preventDefault();
             const btn = document.getElementById('submit-btn');
             const msg = document.getElementById('response-msg');
-            
             btn.innerText = 'שולח...';
-            btn.disabled = true;
-
-            // שים לב: כאן יש להזין את ה-Service ID וה-Template ID מחשבונך
+            // יש להחליף את ה-IDs כאן בערכים מחשבון ה-EmailJS שלך
             emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
                 .then(function() {
                     msg.innerText = 'ההודעה נשלחה בהצלחה!';
-                    msg.className = 'mt-4 text-center text-sm font-medium text-green-600';
+                    msg.className = 'mt-4 text-center text-sm text-green-600';
                     msg.classList.remove('hidden');
                     btn.innerText = 'שלח הודעה';
-                    btn.disabled = false;
                     document.getElementById('contact-form').reset();
-                }, function(error) {
-                    msg.innerText = 'שגיאה בשליחה. וודא שהגדרת את ה-IDs.';
-                    msg.className = 'mt-4 text-center text-sm font-medium text-red-600';
+                }, function() {
+                    msg.innerText = 'שגיאה. וודא שהגדרת את ה-IDs בקוד.';
+                    msg.className = 'mt-4 text-center text-sm text-red-600';
                     msg.classList.remove('hidden');
                     btn.innerText = 'שלח הודעה';
-                    btn.disabled = false;
                 });
         });
     </script>
