@@ -69,7 +69,7 @@
                     <textarea name="message" rows="3" class="w-full p-2 thick-border rounded-lg text-sm"></textarea>
                 </div>
                 <button type="submit" id="submit-btn" class="w-full bg-[#2563eb] text-white font-bold py-3 rounded-lg text-sm hover:bg-blue-700 transition">
-                    שלח הודעה
+                    שלח הודעה לד"ר ברונק
                 </button>
             </form>
             <div id="response-msg" class="mt-4 text-center text-sm font-medium hidden"></div>
@@ -93,9 +93,9 @@
             btn.innerText = 'שולח...';
             btn.disabled = true;
 
-            // ה-IDs המדויקים מהצילום שלך
-            const serviceID = 'service_r7a9tp4'; 
-            const templateID = 'template_v888qit'; // וודא שזה ה-ID שמופיע לך ב-Email Templates
+            // עדכון ה-IDs לפי הצילומים ששלחת
+            const serviceID = 'service_r7a9tp4'; //
+            const templateID = 'template_v888qit'; // וודא שזה ה-ID ב-Email Templates
 
             emailjs.sendForm(serviceID, templateID, this)
                 .then(function() {
@@ -106,7 +106,7 @@
                     btn.disabled = false;
                     document.getElementById('contact-form').reset();
                 }, function(error) {
-                    msg.innerText = 'שגיאה בשליחה. בדוק את ה-Template ID.';
+                    msg.innerText = 'שגיאה בשליחה. וודא שה-Template ID נכון.';
                     msg.className = 'mt-4 text-center text-sm text-red-600';
                     msg.classList.remove('hidden');
                     btn.innerText = 'שלח הודעה';
