@@ -8,7 +8,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
-            // מאתחל עם ה-Public Key שלך
+            // Public Key מעודכן
             emailjs.init("CMyoA0-bYFqCbc6cH");
         })();
     </script>
@@ -17,11 +17,11 @@
     <div class="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
         <h1 class="text-2xl font-bold text-center text-slate-800 mb-6">ד"ר שלמה ברונק</h1>
         <form id="contact-form" class="space-y-4">
-            <input type="text" name="user_name" placeholder="שם מלא" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
-            <input type="text" name="user_id" placeholder="תעודת זהות" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
-            <input type="tel" name="user_phone" placeholder="טלפון נייד" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
-            <input type="email" name="user_email" placeholder="אימייל" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
-            <textarea name="message" placeholder="תוכן ההודעה" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
+            <input type="text" name="user_name" placeholder="שם מלא" required class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="text" name="user_id" placeholder="תעודת זהות" required class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="tel" name="user_phone" placeholder="טלפון נייד" required class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="email" name="user_email" placeholder="אימייל" required class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500">
+            <textarea name="message" placeholder="תוכן ההודעה" rows="4" class="w-full p-3 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"></textarea>
             <button type="submit" id="submit-btn" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition duration-300">שלח הודעה</button>
         </form>
         <div id="response-msg" class="mt-4 text-center hidden"></div>
@@ -36,7 +36,7 @@
             btn.innerText = 'שולח...';
             btn.disabled = true;
 
-            // משתמש ב-IDs מהחשבון שלך
+            // IDs מעודכנים מהחשבון שלך
             const serviceID = 'service_r7a9tp4';
             const templateID = 'template_gpfa81w';
 
@@ -60,4 +60,3 @@
     </script>
 </body>
 </html>
-
