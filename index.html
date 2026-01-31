@@ -3,45 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ד"ר שלמה ברונק | מומחה באורתופדיה</title>
+    <title>ד"ר שלמה ברונק | צור קשר</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
-            // ה-Public Key שלך
+            // מאתחל עם ה-Public Key שלך
             emailjs.init("CMyoA0-bYFqCbc6cH");
         })();
     </script>
 </head>
-<body class="bg-gray-100 flex flex-col items-center justify-start min-h-screen p-6 pt-12 text-right">
-    <div class="bg-white rounded-xl shadow-lg p-8 w-full max-w-md">
-        <h1 class="text-2xl font-bold text-center text-slate-800 mb-2">ד"ר שלמה ברונק</h1>
-        <p class="text-center text-blue-600 font-medium mb-8">צור קשר</p>
-
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4 text-right">
+    <div class="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
+        <h1 class="text-2xl font-bold text-center text-slate-800 mb-6">ד"ר שלמה ברונק</h1>
         <form id="contact-form" class="space-y-4">
-            <div>
-                <label class="block text-xs font-semibold mb-1 text-slate-700">שם מלא</label>
-                <input type="text" name="user_name" required class="w-full p-2 border-2 border-slate-200 rounded-lg">
-            </div>
-            <div>
-                <label class="block text-xs font-semibold mb-1 text-slate-700">תעודת זהות</label>
-                <input type="text" name="user_id" required class="w-full p-2 border-2 border-slate-200 rounded-lg">
-            </div>
-            <div>
-                <label class="block text-xs font-semibold mb-1 text-slate-700">טלפון נייד</label>
-                <input type="tel" name="user_phone" required class="w-full p-2 border-2 border-slate-200 rounded-lg">
-            </div>
-            <div>
-                <label class="block text-xs font-semibold mb-1 text-slate-700">אימייל</label>
-                <input type="email" name="user_email" required class="w-full p-2 border-2 border-slate-200 rounded-lg">
-            </div>
-            <div>
-                <label class="block text-xs font-semibold mb-1 text-slate-700">הודעה</label>
-                <textarea name="message" rows="3" class="w-full p-2 border-2 border-slate-200 rounded-lg"></textarea>
-            </div>
-            <button type="submit" id="submit-btn" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition">
-                שלח הודעה
-            </button>
+            <input type="text" name="user_name" placeholder="שם מלא" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+            <input type="text" name="user_id" placeholder="תעודת זהות" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+            <input type="tel" name="user_phone" placeholder="טלפון נייד" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+            <input type="email" name="user_email" placeholder="אימייל" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+            <textarea name="message" placeholder="תוכן ההודעה" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
+            <button type="submit" id="submit-btn" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition duration-300">שלח הודעה</button>
         </form>
         <div id="response-msg" class="mt-4 text-center hidden"></div>
     </div>
@@ -51,27 +32,29 @@
             event.preventDefault();
             const btn = document.getElementById('submit-btn');
             const msg = document.getElementById('response-msg');
+            
             btn.innerText = 'שולח...';
             btn.disabled = true;
 
-            const serviceID = 'service_r7a9tp4'; //
-            const templateID = 'template_dueexcs'; //
+            // משתמש ב-IDs מהחשבון שלך
+            const serviceID = 'service_r7a9tp4';
+            const templateID = 'template_dueexcs';
 
             emailjs.sendForm(serviceID, templateID, this)
                 .then(function() {
-                    msg.innerText = 'ההודעה נשלחה בהצלחה!';
+                    msg.innerText = 'ההודעה נשלחה בהצלחה! נענה בהקדם.';
                     msg.className = 'mt-4 text-green-600 font-bold';
                     msg.classList.remove('hidden');
                     btn.innerText = 'שלח הודעה';
                     btn.disabled = false;
                     document.getElementById('contact-form').reset();
                 }, function(error) {
-                    msg.innerText = 'שגיאה. וודא ששמות השדות ב-EmailJS תואמים.';
+                    msg.innerText = 'שגיאה בשליחה. אנא נסה שוב.';
                     msg.className = 'mt-4 text-red-600 font-bold';
                     msg.classList.remove('hidden');
                     btn.innerText = 'שלח הודעה';
                     btn.disabled = false;
-                    console.log('FAILED...', error);
+                    console.error('FAILED...', error);
                 });
         });
     </script>
