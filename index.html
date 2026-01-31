@@ -8,7 +8,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
-            // המפתח הציבורי שלך מהצילום
+            // המפתח הציבורי שלך
             emailjs.init("CMyoA0-bYFqCbc6cH");
         })();
     </script>
@@ -66,9 +66,9 @@
             btn.innerText = 'שולח...';
             btn.disabled = true;
 
-            // ה-IDs המדויקים מהצילומים שלך
+            // עדכון ה-IDs המדויקים מהצילומים שלך
             const serviceID = 'service_r7a9tp4'; //
-            const templateID = 'template_8w8si95'; //
+            const templateID = 'template_dueexcs'; // ה-ID החדש שלך
 
             emailjs.sendForm(serviceID, templateID, this)
                 .then(function() {
@@ -79,7 +79,7 @@
                     btn.disabled = false;
                     document.getElementById('contact-form').reset();
                 }, function(error) {
-                    msg.innerText = 'שגיאה בשליחה. אנא נסה שוב.';
+                    msg.innerText = 'שגיאה בשליחה. וודא שהכל מוגדר נכון.';
                     msg.className = 'mt-4 text-center text-sm text-red-600';
                     msg.classList.remove('hidden');
                     btn.innerText = 'שלח הודעה';
