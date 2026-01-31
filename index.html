@@ -8,7 +8,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
-            // עדכון המפתח הציבורי החדש שלך
+            // המפתח הציבורי המעודכן שלך
             emailjs.init("CMyoA0-bYFqCbc6cH");
         })();
     </script>
@@ -17,7 +17,6 @@
         .nav-link:hover { opacity: 0.7; }
         .hidden-section { display: none; }
         .thick-border { border: 2px solid #cbd5e1 !important; }
-        .thick-border:focus { border-color: #2563eb !important; outline: none; }
         .content-card {
             background-color: white;
             border-radius: 12px;
@@ -33,14 +32,17 @@
     <div class="content-card text-center">
         <div id="home-page">
             <header class="mb-8">
-                <h1 class="text-2xl font-bold mb-1 text-slate-800">ד"ר שלמה ברונק</h1> <p class="text-base text-blue-600 font-medium mb-8">מומחה באורתופדיה</p>
+                <h1 class="text-2xl font-bold mb-1 text-slate-800">ד"ר שלמה ברונק</h1>
+                <p class="text-base text-blue-600 font-medium mb-8">מומחה באורתופדיה</p>
                 <div class="space-y-2 text-sm text-gray-500">
-                    <p>ניתוחים ארתרוסקופים של הברך</p> <p>טיפול PRP</p>
+                    <p>ניתוחים ארתרוסקופים של הברך</p>
+                    <p>טיפול PRP</p>
                     <p>פציעות ספורט</p>
                 </div>
             </header>
             <nav class="mt-6 pt-6 border-t border-gray-100">
-                <div onclick="showContact()" class="nav-link text-lg">צור קשר</div> </nav>
+                <div onclick="showContact()" class="nav-link text-lg">צור קשר</div>
+            </nav>
         </div>
 
         <div id="contact-page" class="hidden-section text-right">
@@ -67,7 +69,8 @@
                     <textarea name="message" rows="3" class="w-full p-2 thick-border rounded-lg text-sm"></textarea>
                 </div>
                 <button type="submit" id="submit-btn" class="w-full bg-[#2563eb] text-white font-bold py-3 rounded-lg text-sm hover:bg-blue-700 transition">
-                    שלח הודעה </button>
+                    שלח הודעה
+                </button>
             </form>
             <div id="response-msg" class="mt-4 text-center text-sm font-medium hidden"></div>
             <div onclick="showHome()" class="mt-6 text-center text-gray-400 text-[10px] cursor-pointer underline">חזרה לדף הבית</div>
@@ -90,9 +93,9 @@
             btn.innerText = 'שולח...';
             btn.disabled = true;
 
-            // --- חשוב: הזן כאן את ה-IDs שלך מהתפריטים בצד שמאל ב-EmailJS ---
-            const serviceID = 'YOUR_SERVICE_ID'; // מצא בתפריט Email Services
-            const templateID = 'YOUR_TEMPLATE_ID'; // מצא בתפריט Email Templates
+            // ה-IDs המדויקים מהצילום שלך
+            const serviceID = 'service_r7a9tp4'; 
+            const templateID = 'template_v888qit'; // וודא שזה ה-ID שמופיע לך ב-Email Templates
 
             emailjs.sendForm(serviceID, templateID, this)
                 .then(function() {
@@ -103,7 +106,7 @@
                     btn.disabled = false;
                     document.getElementById('contact-form').reset();
                 }, function(error) {
-                    msg.innerText = 'שגיאה. וודא שהגדרת את ה-IDs בקוד.';
+                    msg.innerText = 'שגיאה בשליחה. בדוק את ה-Template ID.';
                     msg.className = 'mt-4 text-center text-sm text-red-600';
                     msg.classList.remove('hidden');
                     btn.innerText = 'שלח הודעה';
