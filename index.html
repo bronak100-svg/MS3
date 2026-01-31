@@ -8,8 +8,8 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
-            // המפתח הציבורי שלך
-            emailjs.init("FKkmN1RQmu2tsfL7H");
+            // עדכון המפתח הציבורי החדש שלך
+            emailjs.init("CMyoA0-bYFqCbc6cH");
         })();
     </script>
     <style>
@@ -90,9 +90,9 @@
             btn.innerText = 'שולח...';
             btn.disabled = true;
 
-            // --- עדכן כאן את ה-IDs שלך מתוך חשבון ה-EmailJS ---
-            const serviceID = 'YOUR_SERVICE_ID'; 
-            const templateID = 'YOUR_TEMPLATE_ID';
+            // --- חשוב: הזן כאן את ה-IDs שלך מהתפריטים בצד שמאל ב-EmailJS ---
+            const serviceID = 'YOUR_SERVICE_ID'; // מצא בתפריט Email Services
+            const templateID = 'YOUR_TEMPLATE_ID'; // מצא בתפריט Email Templates
 
             emailjs.sendForm(serviceID, templateID, this)
                 .then(function() {
