@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ד"ר שלמה ברונק | מומחה באורתופדיה</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // המפתח הציבורי שלך מהצילום
+            emailjs.init("FKkmN1RQmu2tsfL7H");
+        })();
+    </script>
+    <style>
+        .nav-link { color: #2563eb; transition: opacity 0.3s ease; cursor: pointer; font-weight: 600; }
+        .nav-link:hover { opacity: 0.8; }
+        .hidden-section { display: none; }
+        
+        /* שוליים עבים לשדות (2px) לראייה טובה יותר */
+        .thick-border {
+            border: 2px solid #cbd5e1 !important;
+        }
+        .thick-border:focus {
+            border-color: #2563eb !important;
+            outline: none;
+        }
+
+        /* מלבן לבן במרכז המסך */
+        .content-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 500px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-slate-900 flex flex-col items-center justify-start min-h-screen p-6 pt-12">
+
+    <div class="content-card">
+        
+        <div id="home-page" class="text-center">
+            <header class="mb-8">
+                <h1 class="text-2xl md:text-3xl font-bold mb-1 text-slate-800">ד"ר שלמה ברונק</h1>
+                <p class="text-base md:text-lg text-blue-600 font-medium mb-8">מומחה באורתופדיה</p>
+                
+                <div class="space-y-2 text-sm md:text-base text-gray-500">
+                    <p>ניתוחים ארתרוסקופים של הברך</p>
+                    <p>טיפול PRP</p>
+                    <p>פציעות ספורט</p>
+                </div>
+            </header>
+            <nav class="mt-6 pt-6 border-t border-gray-100">
+                <div onclick="showContact()" class="nav-link text-lg inline-block">צור קשר</div>
+            </nav>
+        </div>
+
+        <div id="contact-page" class="hidden-section">
+            <h1 class="text-xl font-bold text-center mb-8 text-slate-800">צרו קשר</h1>
+            
+            <form id="contact-form" class="space-y-4 text-right">
+                <div>
+                    <label class="block text-xs font-semibold mb-1 mr-1">שם מלא</label>
+                    <input type="text" name="user_name" required class="w-full p-2 thick-border rounded-lg text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold mb-1 mr-1">תעודת זהות</label>
+                    <input type="text" name="user_id" required class="w-full p-2 thick-border rounded-lg text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold mb-1 mr-1">טלפון נייד</label>
+                    <input type="tel" name="user_phone" required class="w-full p-2 thick-border rounded-lg text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold mb-1 mr-1">אימייל</label>
+                    <input type="email" name="user_email" required class="w-full p-2 thick-border rounded-lg text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold mb-1 mr-1">הודעה</label>
+                    <textarea name="message" rows="3" class="w-full p-2 thick-border rounded-lg text-sm"></textarea>
+                </div>
+
+                <button type="submit" id="submit-btn" class="w-full bg-[#2563eb] text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition shadow-sm text-sm">
+                    שלח הודעה
+                </button>
+            </form>
+            
+            <div id="response-msg" class="mt-4 text-center text-sm font-medium hidden"></div>
+
+            <div class="mt-6 text-center">
+                <div onclick="showHome()" class="text-gray-400 hover:text-black text-[10px] cursor-pointer underline">חזרה לדף הבית</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function showContact() {
+            document.getElementById('home-page').classList.add('hidden-section');
+            document.getElementById('contact-page').classList.remove('hidden-section');
+            window.scrollTo(0, 0);
+        }
+
+        function showHome() {
+            document.getElementById('contact-page').classList.add('hidden-section');
+            document.getElementById('home-page').classList.remove('hidden-section');
+            window.scrollTo(0, 0);
+        }
+
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            const msg = document.getElementById('response-msg');
+            
+            btn.innerText = 'שולח...';
+            btn.disabled = true;
+
+            // שים לב: כאן יש להזין את ה-Service ID וה-Template ID מחשבונך
+            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+                .then(function() {
+                    msg.innerText = 'ההודעה נשלחה בהצלחה!';
+                    msg.className = 'mt-4 text-center text-sm font-medium text-green-600';
+                    msg.classList.remove('hidden');
+                    btn.innerText = 'שלח הודעה';
+                    btn.disabled = false;
+                    document.getElementById('contact-form').reset();
+                }, function(error) {
+                    msg.innerText = 'שגיאה בשליחה. וודא שהגדרת את ה-IDs.';
+                    msg.className = 'mt-4 text-center text-sm font-medium text-red-600';
+                    msg.classList.remove('hidden');
+                    btn.innerText = 'שלח הודעה';
+                    btn.disabled = false;
+                });
+        });
+    </script>
+</body>
+</html>
